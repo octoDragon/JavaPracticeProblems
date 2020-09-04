@@ -4,11 +4,17 @@
 // the only allowed operations are to check the values of two cards and to
 // exchange two cards(keeping them face down).
 
+import edu.princeton.cs.algs4.StdOut;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class DeckSort {
     public static void main(String[] args) {
         Card[] myDeck = Deck.MakeDeck();
-        //Deck.Shuffel
-        //Deck.Print
+        Deck.ShuffleDeck(myDeck);
+        Deck.PrintDeck(myDeck);
         //Deck.Sort
         //Deck.Print
     }
@@ -30,6 +36,24 @@ class Deck {
                 myDeck[cardCount] = card;
                 cardCount++;
             }
+        return myDeck;
+    }
+
+    static Card[] ShuffleDeck(Card[] myDeck) {
+        List<Card> cardList = Arrays.asList(myDeck);
+        Collections.shuffle(cardList);
+        cardList.toArray(myDeck);
+        return myDeck;
+    }
+
+    static void PrintDeck(Card[] myDeck) {
+        for (Card card : myDeck) {
+            StdOut.println(card.S + " " + card.R);
+        }
+    }
+
+    static Card[] Sort(Card[] myDeck) {
+        
         return myDeck;
     }
 }
