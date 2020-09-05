@@ -15,7 +15,7 @@ public class DeckSort {
         Card[] myDeck = Deck.MakeDeck();
         Deck.ShuffleDeck(myDeck);
         Deck.PrintDeck(myDeck);
-        //Deck.Sort
+        //Deck.Sort();
         //Deck.Print
     }
 }
@@ -53,10 +53,22 @@ class Deck {
     }
 
     static Card[] Sort(Card[] myDeck) {
-        
+        int N = myDeck.length;
+        for (int i = 1; i < N; i++) {
+            for (int j = i; j > 0 && less(myDeck[j], myDeck[j - 1]); j--)
+                exch(a, j, j - 1);
+        }
         return myDeck;
     }
 }
+
+    static static boolean less(int s1, int s2, int r1, int r2) {
+
+    }
+
+    private static void exch(Card[] myDeck, Card i, Card k) {
+        
+    }
 
 class Card {
     int S;
@@ -67,3 +79,4 @@ class Card {
         R = rank;
     }
 }
+
