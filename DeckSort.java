@@ -14,9 +14,9 @@ public class DeckSort {
     public static void main(String[] args) {
         Card[] myDeck = Deck.MakeDeck();
         Deck.ShuffleDeck(myDeck);
-        //Deck.PrintDeck(myDeck);
-        //StdOut.println("----------------");
-        Deck.Sort(myDeck);
+        Deck.PrintDeck(myDeck);
+        StdOut.println("----------------");
+        myDeck = Deck.Sort(myDeck);
         Deck.PrintDeck(myDeck);
     }
 }
@@ -57,23 +57,25 @@ class Deck {
         int N = myDeck.length;
         for (int i = 1; i < N; i++) {
             for (int j = i; j > 0 && less(myDeck[j], myDeck[j - 1]); j--) {
-                exch(myDeck, i, j);
+                exch(myDeck, j, j - 1);
             }
         }
         return myDeck;
     }
 
     private static boolean less(Card movingCard, Card comparingCard) {
-        if (movingCard.R < comparingCard.R && movingCard.S < comparingCard.S)
-            return true;
-        else
-            return false;
+        if (movingCard.S <= comparingCard.S) {
+            if (movingCard.R < comparingCard.R) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private static void exch(Card[] myDeck, int i, int j) {
-        Card t = myDeck[i];
-        myDeck[i] = myDeck[j];
-        myDeck[j] = t;
+    private static void exch(Card[] myDeck, int movingCard, int comparedCard) {
+        Card t = myDeck[movingCard];
+        myDeck[movingCard] = myDeck[comparedCard];
+        myDeck[comparedCard] = t;
 
     }
 }
