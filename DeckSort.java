@@ -15,8 +15,8 @@ public class DeckSort {
         Card[] myDeck = Deck.MakeDeck();
         Deck.ShuffleDeck(myDeck);
         Deck.PrintDeck(myDeck);
-        StdOut.println("----------------");
-        myDeck = Deck.Sort(myDeck);
+        StdOut.println("-------AFTER-SORT---------");
+        Deck.Sort(myDeck);
         Deck.PrintDeck(myDeck);
     }
 }
@@ -27,12 +27,10 @@ class Deck {
     static Card[] MakeDeck() {
         Card[] myDeck = new Card[NUMBEROFCARDS];
         int cardCount = 0;
+        //4 different suites and 13 numbers of cards
+        //ace to king
         for (int i = 1; i <= 4; i++)
             for (int k = 1; k <= 13; k++) {
-                //uncomment to write deck to a file
-                //using termnal command: java-algs4 DeckSort > 'file.txt'
-                //StdOut.println(i + " " + k);
-
                 Card card = new Card(i, k);
                 myDeck[cardCount] = card;
                 cardCount++;
@@ -54,6 +52,8 @@ class Deck {
     }
 
     static Card[] Sort(Card[] myDeck) {
+        //Uses insertion sort to sort deck of cards, looking at only
+        //two cards at a time to sort the deck
         int N = myDeck.length;
         for (int i = 1; i < N; i++) {
             for (int j = i; j > 0 && less(myDeck[j], myDeck[j - 1]); j--) {
@@ -76,13 +76,14 @@ class Deck {
     }
 
     private static void exch(Card[] myDeck, int movingCard, int comparedCard) {
-        Card t = myDeck[movingCard];
+        Card temp = myDeck[movingCard];
         myDeck[movingCard] = myDeck[comparedCard];
-        myDeck[comparedCard] = t;
+        myDeck[comparedCard] = temp;
 
     }
 }
 
+//subclass card fills the deck array
 class Card {
     int S;
     int R;
