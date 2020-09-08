@@ -64,7 +64,10 @@ class Deck {
     }
 
     private static boolean less(Card movingCard, Card comparingCard) {
-        if (movingCard.S <= comparingCard.S) {
+        if (movingCard.S < comparingCard.S) {
+            return true;
+        }
+        else if (movingCard.S == comparingCard.S) {
             if (movingCard.R < comparingCard.R) {
                 return true;
             }
