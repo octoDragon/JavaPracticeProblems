@@ -5,7 +5,6 @@
 //TO RUN: java-algs4 UnionFindVariations input.txt //TODO change this towards end
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 public class UnionFindVariations {
@@ -25,18 +24,28 @@ public class UnionFindVariations {
         return count;
     }
 
-    public boolean connected(int p, int q) {
-        return find(p) == find(q);
+    public boolean quickFind_connected(int p, int q) {
+        return quickFind_find(p) == quickFind_find(q);
     }
 
     //quickFind -->
     public int quickFind_find(int p) {
+        return id[p];
     }
 
-    public int quickFind_union(int p, int q) {
+    public void quickFind_union(int p, int q) {
+        int qID = quickFind_find(p);
+        int pID = quickFind_find(q);
+        if (pID == qID)
+            return;
+        for (int i = 0; i < id.length; i++) {
+            if (id[i] == qID)
+                id[i] = pID;
+        }
+        count--;
 
     }
-
+    
     //quickUnion
     //weightedQuickUnion
 
@@ -45,13 +54,15 @@ public class UnionFindVariations {
         int N = in.readInt();
         UnionFindVariations uF = new UnionFindVariations(N);
         while (!in.isEmpty()) {
-            int p = StdIn.readInt();
-            int q = StdIn.readInt();
-            if (uF.connected(p, q)) continue;
-            uF.union(p, q);
+            int p = in.readInt();
+            int q = in.readInt();
+            if (uF.quickFind_connected(p, q)) {
+                continue;
+            } //need to change this t ofit other UF variations
+            uF.quickFind_union(p, q); //same here; what's the best way to do this?
             StdOut.println(p + " " + q);
         }
-
+        StdOut.println(uF.count() + " components");
     }
 
     //quick find
